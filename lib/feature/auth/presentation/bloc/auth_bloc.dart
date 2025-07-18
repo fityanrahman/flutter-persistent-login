@@ -4,8 +4,8 @@ import 'dart:io';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:persistent_login/core/errors/custom_exception.dart';
 import 'package:persistent_login/feature/auth/domain/usecases/auth_usecase.dart';
-import 'package:persistent_login/feature/dashboard/presentation/bloc/auth_event.dart';
-import 'package:persistent_login/feature/dashboard/presentation/bloc/auth_state.dart';
+import 'package:persistent_login/feature/auth/presentation/bloc/auth_event.dart';
+import 'package:persistent_login/feature/auth/presentation/bloc/auth_state.dart';
 
 // AuthBloc handles authentication state changes based on incoming AuthEvents
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
