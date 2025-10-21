@@ -13,7 +13,7 @@
       "type": "http",
       "documentation": "",
       "method": "post",
-      "endpoint": "login",
+      "endpoint": "mobile-login",
       "responses": [
         {
           "uuid": "81f15261-9e9e-4279-ac1b-b8a017373993",
@@ -28,21 +28,28 @@
           "sendFileAsBody": false,
           "rules": [
             {
-              "target": "body",
-              "modifier": "",
-              "value": "{     \"username\": \"admin\",     \"password\": \"admin\" }",
+              "target": "header",
+              "modifier": "Content-type",
+              "value": "application/json",
               "invert": false,
               "operator": "equals"
             },
             {
-              "target": "header",
-              "modifier": "Content-Type",
-              "value": "application/json",
+              "target": "body",
+              "modifier": "$.username",
+              "value": "admin",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "$.password",
+              "value": "admin",
               "invert": false,
               "operator": "equals"
             }
           ],
-          "rulesOperator": "OR",
+          "rulesOperator": "AND",
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,

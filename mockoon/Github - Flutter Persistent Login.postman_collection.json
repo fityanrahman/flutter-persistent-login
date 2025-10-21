@@ -13,7 +13,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"admin\"\r\n}",
+					"raw": "{\"username\":\"admin\",\"password\":\"admin\"}\r\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -21,71 +21,16 @@
 					}
 				},
 				"url": {
-					"raw": "{{address}}/login",
+					"raw": "{{address}}/mobile-login",
 					"host": [
 						"{{address}}"
 					],
 					"path": [
-						"login"
+						"mobile-login"
 					]
 				}
 			},
 			"response": [
-				{
-					"name": "401 - Login Failed",
-					"originalRequest": {
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "{{address}}/login",
-							"host": [
-								"{{address}}"
-							],
-							"path": [
-								"login"
-							]
-						}
-					},
-					"status": "Unauthorized",
-					"code": 401,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "Content-Type",
-							"value": "application/json; charset=utf-8"
-						},
-						{
-							"key": "Access-Control-Allow-Origin",
-							"value": "*"
-						},
-						{
-							"key": "Access-Control-Allow-Methods",
-							"value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
-						},
-						{
-							"key": "Access-Control-Allow-Headers",
-							"value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
-						},
-						{
-							"key": "Content-Length",
-							"value": "105"
-						},
-						{
-							"key": "Date",
-							"value": "Wed, 16 Jul 2025 16:15:34 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						},
-						{
-							"key": "Keep-Alive",
-							"value": "timeout=5"
-						}
-					],
-					"cookie": [],
-					"body": "{\n    \"status\": false,\n    \"username\": null,\n    \"token\": null,\n    \"message\": \"Invalid username or password!\"\n}"
-				},
 				{
 					"name": "200 - Login Success",
 					"originalRequest": {
@@ -93,7 +38,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"admin\"\r\n}",
+							"raw": "{\"username\":\"admin\",\"password\":\"admin\"}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -101,12 +46,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{address}}/login",
+							"raw": "{{address}}/mobile-login",
 							"host": [
 								"{{address}}"
 							],
 							"path": [
-								"login"
+								"mobile-login"
 							]
 						}
 					},
@@ -136,7 +81,7 @@
 						},
 						{
 							"key": "Date",
-							"value": "Wed, 16 Jul 2025 16:20:41 GMT"
+							"value": "Tue, 21 Oct 2025 15:53:48 GMT"
 						},
 						{
 							"key": "Connection",
@@ -149,6 +94,70 @@
 					],
 					"cookie": [],
 					"body": "{\n    \"status\": true,\n    \"username\": \"admin\",\n    \"token\": \"this_is_the_token\",\n    \"message\": \"Login success!\"\n}"
+				},
+				{
+					"name": "401 - Login Failed",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"username\":\"admin\",\"password\":\"admi\"}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{address}}/mobile-login",
+							"host": [
+								"{{address}}"
+							],
+							"path": [
+								"mobile-login"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+						},
+						{
+							"key": "Content-Length",
+							"value": "105"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 21 Oct 2025 15:54:57 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": false,\n    \"username\": null,\n    \"token\": null,\n    \"message\": \"Invalid username or password!\"\n}"
 				}
 			]
 		}
