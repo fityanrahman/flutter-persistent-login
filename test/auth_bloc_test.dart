@@ -7,7 +7,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:persistent_login/core/const/api_const.dart';
 import 'package:persistent_login/core/errors/custom_exception.dart';
-import 'package:persistent_login/feature/auth/domain/entities/auth.dart';
+import 'package:persistent_login/feature/auth/domain/entities/auth_entity.dart';
 import 'package:persistent_login/feature/auth/domain/usecases/auth_usecase.dart';
 import 'package:persistent_login/feature/auth/presentation/bloc/auth_bloc.dart';
 import 'package:persistent_login/feature/auth/presentation/bloc/auth_event.dart';

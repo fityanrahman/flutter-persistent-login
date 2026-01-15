@@ -1,4 +1,4 @@
-import 'package:persistent_login/feature/auth/domain/entities/auth.dart';
+import 'package:persistent_login/feature/auth/domain/entities/auth_entity.dart';
 
 abstract class AuthUseCase {
 

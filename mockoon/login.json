@@ -13,7 +13,7 @@
       "type": "http",
       "documentation": "",
       "method": "post",
-      "endpoint": "mobile-login",
+      "endpoint": "login",
       "responses": [
         {
           "uuid": "81f15261-9e9e-4279-ac1b-b8a017373993",
@@ -58,7 +58,7 @@
         },
         {
           "uuid": "7120b214-8a0f-462e-8553-2bc5a4bad325",
-          "body": "{\n  \"status\": false,\n  \"username\": null,\n  \"token\": null,\n  \"message\" : \"Invalid username or password!\"\n}",
+          "body": "{\n  \"status\": false,\n  \"username\": \"\",\n  \"token\": \"\",\n  \"message\" : \"Invalid username or password!\"\n}",
           "latency": 0,
           "statusCode": 401,
           "label": "",
