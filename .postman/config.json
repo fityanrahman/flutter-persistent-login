@@ -1,0 +1,14 @@
+{
+  "workspace": {
+    "id": "76755ad8-15ac-45c7-91eb-ac9bf1f156d0"
+  },
+  "entities": {
+    "collections": [
+      "..\\mockoon\\Github - Flutter Persistent Login.postman_collection.json"
+    ],
+    "environments": [],
+    "specs": [],
+    "flows": [],
+    "globals": []
+  }
+}
