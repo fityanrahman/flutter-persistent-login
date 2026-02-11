@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:http/http.dart' as http;
 import 'package:persistent_login/core/const/api/api_const.dart';
@@ -19,6 +20,8 @@ class LoginApi {
       );
 
       final int code = response.statusCode;
+      log('Response code: $code');
+      log('Response body: ${response.body}');
 
       // if unauthorized
       if (code == 401) {
@@ -29,7 +32,7 @@ class LoginApi {
       if (code >= 200 && code < 300) {
         final result = jsonDecode(response.body);
 
-        return AuthModel.fromJson(result.body).toDomain();
+        return AuthModel.fromJson(result).toDomain();
       } else {
         throw Exception('Failed to login - Code $code');
       }

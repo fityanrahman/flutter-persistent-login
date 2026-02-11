@@ -28,22 +28,15 @@
           "sendFileAsBody": false,
           "rules": [
             {
-              "target": "header",
-              "modifier": "Content-type",
-              "value": "application/x-www-form-urlencoded",
-              "invert": false,
-              "operator": "equals"
-            },
-            {
               "target": "body",
-              "modifier": "$.username",
+              "modifier": "username",
               "value": "admin",
               "invert": false,
               "operator": "equals"
             },
             {
               "target": "body",
-              "modifier": "$.password",
+              "modifier": "password",
               "value": "admin",
               "invert": false,
               "operator": "equals"

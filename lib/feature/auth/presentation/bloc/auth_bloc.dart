@@ -54,18 +54,23 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       );
 
       // Emit success state with user data
+      log('Session: $session');
       emit(AuthAuthenticated(session: session));
     } on SocketException catch (e) {
       // Emit failure for no internet connection
+      log('SocketException: ${e.toString()}');
       emit(AuthError(message: 'No Internet Connection', detail: e.toString()));
     } on TimeoutException catch (e) {
       // Emit failure state for timeout
+      log('TimeoutException: ${e.toString()}');
       emit(AuthError(message: 'Login request time out', detail: e.toString()));
     } on CustomException catch (e) {
       // Emit failure state for known custom error
+      log('CustomException: ${e.message}');
       emit(AuthError(message: e.message, detail: e.toString()));
     } catch (e) {
       // Emit failure state for any other unknown error
+      log('UnknownException: ${e.toString()}');
       emit(AuthError(message: e.toString(), detail: e.toString()));
     }
   }
