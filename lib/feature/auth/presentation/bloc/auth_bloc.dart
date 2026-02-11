@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,18 +25,20 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   // Handles AppStarted event: check if user is already logged in
   Future<void> _onAppStarted(AppStarted event, Emitter<AuthState> emit) async {
-    final isLoggedIn = await authUseCase.isLoggedIn();
+    try {
+      final session = await authUseCase.restoreSession();
+      log('Session: $session');
 
-    if (isLoggedIn) {
-      // Retrieve username and token if logged in
-      final username = await authUseCase.getUsername();
-      final token = await authUseCase.getToken();
-
-      // Emit success state with user data
-      emit(AuthSuccess(username: username, token: token));
-    } else {
-      // Emit initial state if not logged in
-      emit(AuthInitial());
+      if (session != null) {
+        emit(AuthAuthenticated(session: session));
+      } else {
+        emit(AuthInitial());
+      }
+    } catch (e) {
+      log('Error: $e');
+      emit(
+        AuthError(message: 'Failed to restore session', detail: e.toString()),
+      );
     }
   }
 
@@ -45,38 +48,33 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     try {
       // Call login method with provided credentials
-      await authUseCase.login(
+      final session = await authUseCase.login(
         username: event.username,
         password: event.password,
       );
 
-      // Get username and token after successful login
-      final username = await authUseCase.getUsername();
-      final token = await authUseCase.getToken();
-
       // Emit success state with user data
-      emit(AuthSuccess(username: username, token: token));
-    } on SocketException {
+      emit(AuthAuthenticated(session: session));
+    } on SocketException catch (e) {
       // Emit failure for no internet connection
-      emit(AuthFailure(message: 'No Internet Connection'));
-    } on TimeoutException {
+      emit(AuthError(message: 'No Internet Connection', detail: e.toString()));
+    } on TimeoutException catch (e) {
       // Emit failure state for timeout
-      emit(AuthFailure(message: 'Login request time out'));
+      emit(AuthError(message: 'Login request time out', detail: e.toString()));
     } on CustomException catch (e) {
       // Emit failure state for known custom error
-      emit(AuthFailure(message: e.message));
+      emit(AuthError(message: e.message, detail: e.toString()));
     } catch (e) {
       // Emit failure state for any other unknown error
-      emit(AuthFailure(message: e.toString()));
+      emit(AuthError(message: e.toString(), detail: e.toString()));
     }
   }
 
   // Handles AuthLogOut event: logout and reset to initial state
-  Future<void> _onLogOut(AuthLogOut event, Emitter<AuthState> emit) async{
+  Future<void> _onLogOut(AuthLogOut event, Emitter<AuthState> emit) async {
     // Perform logout logic
     await authUseCase.logout();
     // Emit initial state after logout
     emit(AuthInitial());
   }
 }
-

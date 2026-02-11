@@ -1,3 +1,5 @@
+import 'package:persistent_login/feature/auth/domain/entities/auth_entity.dart';
+
 class AuthModel {
   final bool status;
   final String username;
@@ -24,4 +26,8 @@ class AuthModel {
     "token": token,
     "message": message,
   };
+}
+
+extension AuthMapper on AuthModel {
+  AuthEntity toDomain() => AuthEntity(username: username, token: token);
 }

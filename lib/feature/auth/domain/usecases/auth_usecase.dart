@@ -3,7 +3,7 @@ import 'package:persistent_login/feature/auth/domain/entities/auth_entity.dart';
 abstract class AuthUseCase {
 
   // Attempt login
-  Future<AuthEntities> login({
+  Future<AuthEntity> login({
     required String username,
     required String password,
   });
@@ -11,12 +11,6 @@ abstract class AuthUseCase {
   // Logout currently logged in user
   Future<void> logout();
 
-  // Checks whether user is currently logged in
-  Future<bool> isLoggedIn();
-
-  // Returns the currently logged in user token
-  Future<String> getToken();
-
-  // Returns the currently logged in user name
-  Future<String> getUsername();
+  // Restore session
+  Future<AuthEntity?> restoreSession();
 }

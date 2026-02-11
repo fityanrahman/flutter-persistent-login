@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:persistent_login/feature/auth/domain/entities/auth_entity.dart';
 
 sealed class AuthState extends Equatable {
   const AuthState();
@@ -11,22 +12,25 @@ class AuthInitial extends AuthState {}
 
 class AuthLoading extends AuthState {}
 
-class AuthSuccess extends AuthState {
-  final String username;
-  final String token;
+class AuthAuthenticated extends AuthState {
+  final AuthEntity session;
 
-  const AuthSuccess({required this.username, required this.token});
+  const AuthAuthenticated({required this.session});
 
   @override
-  List<Object?> get props => [username, token];
+  List<Object?> get props => [session];
 }
 
-class AuthFailure extends AuthState{
+class AuthUnauthenticated extends AuthState {}
+
+class AuthError extends AuthState{
   final String message;
+  final String? detail;
 
-  const AuthFailure({required this.message});
+  const AuthError({required this.message, this.detail});
 
-  List<Object?> get props => [message];
+  @override
+  List<Object?> get props => [message, detail];
 }
 
 
