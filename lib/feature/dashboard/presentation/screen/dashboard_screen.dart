@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:persistent_login/feature/auth/presentation/bloc/auth_bloc.dart';
+import 'package:persistent_login/feature/auth/presentation/bloc/auth_event.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
@@ -16,7 +18,7 @@ class DashboardScreen extends StatelessWidget {
             SizedBox(height: 24),
             MaterialButton(
               onPressed: () {
-                context.go('/login');
+                context.read<AuthBloc>().add(AuthLogOut());
               },
               child: Text('Logout'),
             ),
