@@ -1,5 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:persistent_login/core/extensions/go_route_extension.dart';
+import 'package:persistent_login/core/widgets/auth_guard.dart';
 import 'package:persistent_login/feature/auth/presentation/bloc/auth_bloc.dart';
 import 'package:persistent_login/feature/auth/presentation/bloc/auth_state.dart';
 import 'package:persistent_login/feature/auth/presentation/screen/login_screen.dart';
@@ -31,28 +33,46 @@ class AppRouter {
         return null;
       },
       routes: [
-        GoRoute(
-          path: '/login',
-          builder: (context, state) => BlocListener<AuthBloc, AuthState>(
-            listener: (context, state) {
-              if (state is AuthAuthenticated) {
-                context.go('/dashboard');
-              }
-            },
-            child: const LoginScreen(),
-          ),
-        ),
-        GoRoute(
-          path: '/dashboard',
-          builder: (context, state) => BlocListener<AuthBloc, AuthState>(
-            listener: (context, state) {
-              if (state is AuthInitial || state is AuthUnauthenticated) {
-                context.go('/login');
-              }
-            },
-            child: const DashboardScreen(),
-          ),
-        ),
+        // GoRoute(
+        //   path: '/login',
+        //   builder: (context, state) => BlocListener<AuthBloc, AuthState>(
+        //     listener: (context, state) {
+        //       if (state is AuthAuthenticated) {
+        //         context.go('/dashboard');
+        //       }
+        //     },
+        //     child: const LoginScreen(),
+        //   ),
+        // ),
+        // GoRoute(
+        //   path: '/dashboard',
+        //   builder: (context, state) => BlocListener<AuthBloc, AuthState>(
+        //     listener: (context, state) {
+        //       if (state is AuthInitial || state is AuthUnauthenticated) {
+        //         context.go('/login');
+        //       }
+        //     },
+        //     child: const DashboardScreen(),
+        //   ),
+        // ),
+
+        // v2 with authguard
+        // GoRoute(
+        //   path: '/login',
+        //   builder: (context, state) => LoginGuard(
+        //     child: const LoginScreen(),
+        //   ),
+        // ),
+        // GoRoute(
+        //   path: '/dashboard',
+        //   builder: (context, state) => AuthGuard(
+        //     child: const DashboardScreen(),
+        //   ),
+        // ),
+
+        // v3 with extension
+        GoRouteAuthExtension.login(path: '/login', child: const LoginScreen()),
+        GoRouteAuthExtension.authenticated(path: '/dashboard', child: const DashboardScreen()),
       ],
     );
   }
